@@ -1,126 +1,240 @@
+<div align="center">
+
 # AccessPath
 
-**Accessible Campus Navigation & AI-Powered Barrier Reporting System**
-*"Every Student Deserves an Accessible Path."*
+### Accessible Campus Navigation & Accessibility Operations Platform
 
-AccessPath helps students with disabilities, visitors, campus volunteers, moderators, and facilities administrators navigate campuses safely with verified step-free routing, report physical accessibility barriers in English or বাংলা (Bengali), verify conditions on-site, and manage remediation without ever inventing unverified accessible paths.
+**Every student deserves an accessible path.**
 
----
+[![Node.js](https://img.shields.io/badge/Node.js-22%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-7-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Status](https://img.shields.io/badge/status-active%20development-blue)](#project-status)
 
-## Key Capabilities
+[Features](#-what-accesspath-does) · [Architecture](#-architecture-at-a-glance) · [Getting Started](#-getting-started) · [Documentation](#-documentation) · [Contributing](./CONTRIBUTING.md)
 
-- **Advanced Accessible Routing 2.0 (Dijkstra & A*)**: Priority `MinHeap` optimizer with optional Haversine A* search, hard constraint filtering (blocked edges, live elevator/facility outages, stairs, unverified paths, slopes, clearances), Top-3 distinct alternatives, route diversity/confidence scoring, and `NO_VERIFIED_ACCESSIBLE_ROUTE` safe failure.
-- **Accessibility Intelligence & Trust Engine**: Segment-level freshness tracking (`VERIFIED_CURRENT`, `VERIFICATION_EXPIRING`, `STALE`, `UNVERIFIED`, `DISPUTED`, `BLOCKED`, `UNKNOWN`), expiration policies, conflicting-report detection, building verification coverage, and explicit inspection rationales (AI never certifies accessibility).
-- **Multi-Floor Indoor Navigation & Waypoints**: Interactive SVG building floor maps (`Ground Floor` ↔ `Second Floor`), accessible elevator transitions, registered QR waypoint lookup (`/api/v1/campuses/:id/qr/:code`), camera permission checks, and labelled Web Bluetooth / WebXR capability probes.
-- **Live Campus Accessibility Operations & Class Schedule Planner**: Facility status tracking (elevators, doors, restrooms, construction zones) with subscriber alerts, plus personal class-to-class accessible timetable planning with recommended departure times and tight/unverified transition warnings.
-- **Accessible Emergency Evacuation Planner**: Floor-specific evacuation paths, wheelchair-compatible exits, assembly points, safety admin approval workflow, and high-contrast printable evacuation plans (with explicit non-dispatch safety disclosure).
-- **Hardened Security & Production Safety**: Cryptographic double-submit CSRF + Origin validation, server-side `userSessions` revocation on logout/password reset/deactivation/role changes, self `campusId` mutation lock + authorized campus transfer requests, SHA-256 single-use password reset/verification tokens, EXIF-stripping image re-encoder (`pngjs` / `jpeg-js`), strict Zod PATCH allowlists, DB backup/restore/integrity checks, and strict production startup guards (no auto-seeding or silent JSON fallback in `NODE_ENV=production`).
-- **Accessibility Digital Twin (What-If Simulator)**: Campus admins can compare before/after verified route availability when a segment is hypothetically fixed, closed, or given a proposed ramp. The simulator uses a detached graph copy, preserves verification state, is audit-logged, and never publishes simulated changes.
-- **Predictive Maintenance 2.0, GIS & System Observability**: Equipment MTTR & SLA compliance analytics, GeoJSON FeatureCollection export/topology validation/versioned import, `X-Request-Id` tracing, and 7-service readiness monitoring.
-- **Quick Search, Shortcuts & Guided Start (4.2)**: `Ctrl/Cmd+K` command palette (pages, quick settings, feature docs; EN / বাংলা), `?` shortcut help with `G`-then-letter navigation, a dashboard welcome checklist, recently-visited links, and swap / recent-route shortcuts in the route planner.
-- **Bilingual EN / বাংলা Interface, AI & Offline PWA**: Full `i18next` localization, server-side Gemini AI (`gemini-4-hydrogen` via `@google/genai`) with deterministic mock fallback, offline draft `clientRequestId` deduplication, `graphVersion` staleness detection, and Workbox privacy-safe caching.
+</div>
 
 ---
 
-## Quick Start
+## Overview
 
-### 1. Install Dependencies
+AccessPath is a full-stack campus accessibility platform designed to help students, visitors, volunteers, moderators, and facilities teams understand and improve the accessibility of campus environments.
+
+The platform combines accessible route planning, community barrier reporting, on-site verification workflows, facility-status monitoring, indoor wayfinding, and administrative operations. It is designed around one important rule: **a route must not be presented as accessible unless its required accessibility information is sufficiently verified.**
+
+The application includes a bilingual English/Bangla experience and a synthetic demo campus for local evaluation. It is a software project and does not replace an on-site accessibility assessment, emergency service, or formal legal compliance audit.
+
+## ✨ What AccessPath Does
+
+| Area | Capabilities |
+| --- | --- |
+| Accessible route planning | Dijkstra and optional A* search, hard accessibility constraints, alternative routes, and safe failure when no verified route is available |
+| Accessibility trust and verification | Segment-level freshness states, expiring verification, disputed reports, verification coverage, and human inspection workflows |
+| Barrier reporting | Community-submitted accessibility reports, moderation, evidence handling, and follow-up workflows |
+| Indoor navigation | Multi-floor building maps, floor transitions, registered QR waypoints, and browser capability checks |
+| Facility operations | Elevator, door, restroom, and construction status tracking with operational alerts |
+| Class schedule planning | Class-to-class route planning, departure recommendations, and transition warnings |
+| Emergency planning | Floor-aware evacuation planning, accessible exits, assembly points, and printable plans with explicit safety limitations |
+| Accessibility digital twin | Admin-only what-if simulations on a detached graph copy; simulated changes do not become verified campus facts |
+| Operations and analytics | Maintenance metrics, equipment incidents, GeoJSON workflows, request tracing, and readiness monitoring |
+| Bilingual and offline experience | English/Bangla localization, PWA support, offline draft handling, and deterministic AI mock mode |
+
+### Trust-first routing
+
+AccessPath applies accessibility requirements as route constraints rather than treating them as optional preferences. Depending on the route request and available campus data, the engine can account for blocked paths, stairs, facility outages, unverified segments, slopes, and clearance requirements.
+
+When the system cannot establish a suitable verified route, it can return a safe no-route result instead of inventing an accessible path. Route confidence and freshness indicators are decision-support signals, not physical accessibility certifications.
+
+### AI with human oversight
+
+The project includes a server-side Google Gemini integration and a deterministic mock provider for development. AI output is an assistive interface, not an authority: it does not independently verify a building, certify a route, or replace a human inspection.
+
+## 🧱 Technology Stack
+
+| Layer | Technologies |
+| --- | --- |
+| Frontend | React 19, TypeScript, Vite, React Router, TanStack Query |
+| UI and visualization | Tailwind CSS, Lucide, Recharts, Leaflet, Three.js |
+| Backend | Node.js 22+, Express, TypeScript |
+| Data | MongoDB/Mongoose; local JSON persistence for supported development mode |
+| Validation and security | Zod, Helmet, rate limiting, bcrypt, JWT, CSRF and Origin checks |
+| Localization | i18next and react-i18next |
+| AI | Google GenAI SDK with configurable mock fallback |
+| Testing | Vitest, Testing Library, Supertest, Playwright, axe-core |
+| Tooling and delivery | Docker Compose, Prettier, Lighthouse CI, GitHub Actions |
+
+Versions and scripts are defined in [package.json](./package.json).
+
+## 🏛 Architecture at a Glance
+
+The repository is organized as a combined full-stack application:
+
+```text
+AccessPath-Full-Stack/
+├── backend/          # Express API, auth, routing, trust engine and services
+├── frontend/         # React application, pages, components and client services
+├── shared/           # Shared TypeScript contracts
+├── src/              # Vite browser entry point
+├── docs/             # Architecture, API, security and operational documentation
+├── e2e/              # Playwright end-to-end tests
+├── scripts/          # Seed, checks and offline smoke tests
+├── public/           # Static assets and PWA resources
+├── .github/          # CI and repository workflows
+├── server.ts         # Combined development/production server entry point
+├── package.json
+└── README.md
+```
+
+For more detail, see [PROJECT-STRUCTURE.md](./PROJECT-STRUCTURE.md) and [docs/architecture.md](./docs/architecture.md).
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js **22 or newer**
+- npm (or Bun, if you prefer the included `bun.lock`)
+- MongoDB is optional for local development; production configuration requires MongoDB
+- A Gemini API key is optional when using the mock AI provider
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/fahim1252375-maker/AccessPath-Full-Stack.git
+cd AccessPath-Full-Stack
+```
+
+### 2. Install dependencies
+
 ```bash
 npm install
 ```
 
-### 2. Configure Environment
-Copy `.env.example` to `.env` and adjust as needed:
+### 3. Configure environment variables
+
 ```bash
 cp .env.example .env
 ```
-- In development (`NODE_ENV=development`), omit `MONGODB_URI` to run with the persistent local JSON store (`data/accesspath-db.json`). In production (`NODE_ENV=production`), `MONGODB_URI` and a strong `JWT_SECRET` (minimum 32 characters) are strictly required.
-- Set `GEMINI_API_KEY` to enable live Gemini AI calls; omit it to run in deterministic offline `mock` mode.
 
-### 3. Seed & Run Development Server (Port 3000)
-```bash
-npm run seed   # Optional: dev server also auto-seeds empty DB when ALLOW_DEMO_SEED=true
-npm run dev    # Runs Express API + Vite SPA on http://localhost:3000
+For a local run without an AI key, set the following values in `.env`:
+
+```dotenv
+AI_PROVIDER="mock"
+APP_URL="http://localhost:3000"
+PORT="3000"
+ALLOW_DEMO_SEED="true"
 ```
 
-### 4. Production Build & Start
+You can leave `MONGODB_URI` empty for the supported local JSON development store. To use MongoDB locally, provide a valid connection string. For live Gemini features, configure `GEMINI_API_KEY` and select the Gemini provider.
+
+**Never commit your real `.env` file, API keys, database credentials, or production secrets.** The repository ignores `.env*` files other than the safe `.env.example` template.
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### 5. Build for production
+
 ```bash
 npm run build
 npm run budget
-NODE_ENV=production MONGODB_URI="mongodb+srv://..." JWT_SECRET="<32+ char secret>" npm start
 ```
 
-### 5. Docker Compose (App + MongoDB)
+Production startup requires a valid MongoDB connection and a strong `JWT_SECRET` (at least 32 characters):
+
+```bash
+NODE_ENV=production \
+MONGODB_URI="your-mongodb-connection-string" \
+JWT_SECRET="your-long-random-secret" \
+npm start
+```
+
+Do not use example credentials or demo secrets in a production deployment. Review [the deployment guide](./docs/deployment.md) before exposing an instance publicly.
+
+### Docker Compose
+
 ```bash
 cp .env.example .env
-# Set a strong, unique JWT_SECRET in .env
+# Set a unique JWT_SECRET and review the remaining environment values.
 docker compose up --build
 ```
 
+## 🧪 Tests and Quality Checks
+
+The project defines the following commands:
+
+| Command | Purpose |
+| --- | --- |
+| `npm test` | Run Vitest unit and integration tests |
+| `npm run test:simulation` | Run the offline Node smoke-test suite |
+| `npm run lint` | Run TypeScript checking |
+| `npm run typecheck` | Alias for TypeScript checking |
+| `npm run format:check` | Check formatting with Prettier |
+| `npm run build` | Build the production frontend bundle |
+| `npm run test:e2e` | Run Playwright browser tests |
+| `npm run budget` | Check configured bundle-size budgets |
+| `npm run audit` | Run npm dependency vulnerability audit |
+| `npm run lighthouse:ci` | Run configured Lighthouse CI checks |
+
+Run the checks relevant to your change before opening a pull request. Some checks require installed dependencies, browser binaries, network access, or configured services.
+
+### Verification transparency
+
+A command being defined does not mean it has passed in every environment. The project delivery notes record which checks were executed and which were blocked by dependency/network availability. See [docs/testing.md](./docs/testing.md) and [docs/audit-phase4.md](./docs/audit-phase4.md) for the documented verification status. Please do not interpret a configured test suite as a passing test report.
+
+## 🗂 Documentation
+
+| Document | Description |
+| --- | --- |
+| [Feature Registry](./FEATURE_REGISTRY.md) | Detailed feature inventory and status records |
+| [Architecture](./docs/architecture.md) | System components, boundaries, and design |
+| [API Reference](./docs/api-reference.md) | REST API endpoints |
+| [Database Schema](./docs/database-schema.md) | Data models, collections, and indexes |
+| [Routing Algorithm](./docs/routing-algorithm.md) | Route filtering, trust weighting, Dijkstra, and A* |
+| [Accessibility Methodology](./docs/accessibility-methodology.md) | Inclusive design and verification principles |
+| [AI Disclosure](./docs/ai-disclosure.md) | AI provider behavior, limitations, and human oversight |
+| [Privacy Policy](./docs/privacy-policy.md) | Data handling and privacy considerations |
+| [Threat Model](./docs/threat-model.md) | Security threats and mitigations |
+| [Deployment Guide](./docs/deployment.md) | Environment and deployment configuration |
+| [Testing Guide](./docs/testing.md) | Test strategy and quality commands |
+| [Phase 4 Audit](./docs/audit-phase4.md) | Delivery evidence and verification limitations |
+| [Project Structure](./PROJECT-STRUCTURE.md) | Repository layout and entry points |
+| [Changelog](./CHANGELOG.md) | Project change history |
+
+## 🔐 Security and Privacy
+
+Security-sensitive functionality documented in the codebase includes session revocation, password-reset token handling, CSRF and Origin validation, input allowlists, rate limiting, image metadata handling, and production startup safeguards.
+
+This summary is not a security certification. Review the [threat model](./docs/threat-model.md) and [privacy policy](./docs/privacy-policy.md), and report suspected vulnerabilities privately according to [SECURITY.md](./SECURITY.md).
+
+## ⚠️ Scope and Known Limitations
+
+- Live elevator/BMS telemetry, institutional SSO, SMTP delivery, and external maintenance-system integrations require institution-specific credentials and integration work.
+- QR scanning, Bluetooth beacons, and WebXR experiences depend on supported devices, browser permissions, and physical campus infrastructure.
+- Demo campus content is synthetic and must not be treated as real-world campus data.
+- Route and building indicators depend on the accuracy and freshness of submitted and verified data.
+- Emergency plans are informational planning tools; they are not emergency dispatch, official evacuation authorization, or a substitute for local emergency procedures.
+- The project does not claim ADA/DDA compliance, WCAG certification, or formal accessibility certification.
+
+## 🤝 Contributing
+
+Contributions, bug reports, documentation improvements, and accessibility feedback are welcome. Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting a change. By participating, you agree to follow the [Code of Conduct](./CODE_OF_CONDUCT.md).
+
+## 📄 License
+
+Distributed under the MIT License. See [LICENSE](./LICENSE) for details.
+
 ---
 
-## Synthetic Demo Campus & Accounts
+<div align="center">
 
-When the database is empty in non-production environments, AccessPath seeds a clearly labelled **DEMO CAMPUS — SYNTHETIC DATA** (*Demo North Courtyard Campus*, 14 location nodes, 26 weighted path edges, 8 buildings, 4 indoor floor plans, 5 live facility monitors, 5 equipment incidents, sample reports, verifications, maintenance tasks, and emergency routes).
+**AccessPath — Every Student Deserves an Accessible Path.**
 
-Demo accounts use the password configured via `SEED_DEMO_PASSWORD` (default in demo mode: `AccessPathDemo!2026`):
+Built to make campus accessibility information more transparent, verifiable, and actionable.
 
-| Role | Email |
-|---|---|
-| Student | `student.demo@accesspath.example.edu` |
-| Volunteer | `volunteer.demo@accesspath.example.edu` |
-| Moderator | `moderator.demo@accesspath.example.edu` |
-| Campus Admin | `admin.demo@accesspath.example.edu` |
-| Super Admin | `superadmin.demo@accesspath.example.edu` |
-
-*(Quick-fill buttons are available on `/auth/signin` for testing.)*
-
----
-
-## Verification, Testing & Linting
-
-```bash
-npm test                 # Vitest, Supertest and Testing Library
-npm run test:simulation  # Offline Node 22 smoke tests: #215 simulator, #216–#218 navigation features, 218-feature catalog
-npm run typecheck        # tsc --noEmit (alias of lint)
-npm run format           # Prettier write (npm run format:check to verify only)
-npm run lint             # tsc --noEmit
-npm run build            # Production Vite + PWA bundle
-npm run budget           # Total JS and vendor-3d chunk size budgets
-npm run test:e2e         # Playwright + axe-core browser suite
-npm run audit            # npm audit (requires lockfile + registry access)
-npm run lighthouse:ci    # Lighthouse CI on the public landing and feature pages
-```
-
-The offline `test:simulation` command passes 22 native Node tests (4 simulator, 1 catalog, 17 navigation-feature tests) in the preparation environment. Full Vitest, typecheck, build and dependency audit remain blocked because npm registry DNS resolution failed and this archive has no npm lockfile. See [`docs/audit-phase4.md`](./docs/audit-phase4.md) and [`docs/testing.md`](./docs/testing.md) for exact execution status. No blocked check is represented as passed.
-
----
-
-## Documentation & Registry
-
-- [`FEATURE_REGISTRY.md`](./FEATURE_REGISTRY.md) — Feature status matrix; the original #1–#214 records remain; #215 is in Module V and #216–#218 are in Module W
-- [`docs/architecture.md`](./docs/architecture.md) — System, security & trust-boundary architecture
-- [`docs/api-reference.md`](./docs/api-reference.md) — Complete REST API `/api/v1/*` endpoints
-- [`docs/database-schema.md`](./docs/database-schema.md) — 27 Mongoose/repository collections & indexes
-- [`docs/routing-algorithm.md`](./docs/routing-algorithm.md) — Hard filtering, Trust weighting, MinHeap Dijkstra & A*
-- [`docs/ai-disclosure.md`](./docs/ai-disclosure.md) — Gemini usage, privacy & human-in-the-loop rules
-- [`docs/accessibility-methodology.md`](./docs/accessibility-methodology.md) — Inclusive design & truthfulness standards
-- [`docs/privacy-policy.md`](./docs/privacy-policy.md) — Data minimization & reporter anonymity
-- [`docs/deployment.md`](./docs/deployment.md) — Environment variables, production guards & cloud deployment
-- [`docs/testing.md`](./docs/testing.md) — Unit, integration, E2E, accessibility, bundle and Lighthouse verification commands
-- [`docs/audit-phase4.md`](./docs/audit-phase4.md) — Reality audit and honest Phase 4 implementation status
-- [`docs/threat-model.md`](./docs/threat-model.md) — STRIDE threat model and remaining controls
-
----
-
-## Known Limitations
-
-- **External Integrations**: SMTP email dispatch, live campus BMS elevator telemetry, University OIDC SSO, and external CMMS webhooks are implemented as readiness-checked adapters awaiting institutional credentials.
-- **Hardware Modules**: Web Bluetooth beacons, WebXR AR overlays, and camera QR scanning depend on physical campus hardware and browser capability permissions; deterministic demo markers and manual QR inputs are clearly labelled.
-- **No Legal Certification Claim**: Building scores, Trust Engine badges, emergency evacuation printouts, and WCAG 2.2 AA UI targets are operational tools, not formal ADA/DDA certifications or emergency service dispatch systems.
-
----
-
-## License
-
-MIT — see [`LICENSE`](./LICENSE).
+</div>

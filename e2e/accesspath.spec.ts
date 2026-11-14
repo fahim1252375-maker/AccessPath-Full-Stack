@@ -110,7 +110,7 @@ test.describe('AccessPath Phase 4 end-to-end coverage', () => {
   test('falls back to the 2D map when WebGL is unavailable', async ({ page }) => {
     await page.addInitScript(() => {
       const original = HTMLCanvasElement.prototype.getContext;
-      HTMLCanvasElement.prototype.getContext = function (kind: string, ...args: any[]) {
+      HTMLCanvasElement.prototype.getContext = function (this: HTMLCanvasElement, kind: string, ...args: any[]) {
         if (kind === 'webgl' || kind === 'webgl2' || kind === 'experimental-webgl') return null;
         return original.apply(this, [kind, ...args] as any);
       } as typeof HTMLCanvasElement.prototype.getContext;

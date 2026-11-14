@@ -92,14 +92,14 @@ export function destinationsForRole(role?: UserRole | null): QuickNavDestination
 export function normalizeText(value: string): string {
   return value
     .normalize("NFKD")
-    .replace(/[\\u0300-\\u036f]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLocaleLowerCase()
     .trim();
 }
 
 /** Higher scores indicate stronger title matches than keyword-only matches. */
 export function scoreItem(item: SearchableQuickNavItem, query: string): number {
-  const terms = normalizeText(query).split(/\\s+/).filter(Boolean);
+  const terms = normalizeText(query).split(/\s+/).filter(Boolean);
   if (terms.length === 0) return 0;
 
   const title = normalizeText(item.label);
@@ -107,8 +107,8 @@ export function scoreItem(item: SearchableQuickNavItem, query: string): number {
   const keywords = (item.keywords ?? []).map(normalizeText);
 
   return terms.reduce((total, term) => {
-    const titleWords = title.split(/\\s+/);
-    const banglaWords = titleBn.split(/\\s+/);
+    const titleWords = title.split(/\s+/);
+    const banglaWords = titleBn.split(/\s+/);
     const hasTitleExact = title === term;
     const hasTitlePrefix = title.startsWith(term);
     const hasTitleWordPrefix = titleWords.some((word) => word.startsWith(term));
@@ -120,7 +120,7 @@ export function scoreItem(item: SearchableQuickNavItem, query: string): number {
     const hasKeywordExact = keywords.some((keyword) => keyword === term);
     const hasKeywordPrefix = keywords.some((keyword) => keyword.startsWith(term));
     const hasKeywordWordPrefix = keywords.some((keyword) =>
-      keyword.split(/\\s+/).some((word) => word.startsWith(term))
+      keyword.split(/\s+/).some((word) => word.startsWith(term))
     );
     const hasKeywordPartial = keywords.some((keyword) => keyword.includes(term));
 
@@ -146,7 +146,7 @@ export function searchItems<T extends SearchableQuickNavItem>(
   items: readonly T[],
   query: string
 ): T[] {
-  const terms = normalizeText(query).split(/\\s+/).filter(Boolean);
+  const terms = normalizeText(query).split(/\s+/).filter(Boolean);
   if (terms.length === 0) return [...items];
 
   return items
@@ -158,7 +158,7 @@ export function searchItems<T extends SearchableQuickNavItem>(
 
 /** Resolve the best matching navigation entry for a browser route. */
 export function findDestinationByPath(pathname: string): QuickNavDestination | undefined {
-  const normalizedPath = pathname.replace(/\\/+$/, "") || "/";
+  const normalizedPath = pathname.replace(/\/+$/, "") || "/";
   const all = destinationsForRole("super_admin");
   return all
     .filter((item) =>

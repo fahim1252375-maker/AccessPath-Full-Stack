@@ -1,0 +1,1445 @@
+# MASTER BUILD PROMPT — ACCESSPATH
+## Complete AI-Powered Accessible Campus Navigation Platform
+
+Act as a senior full-stack software architect, principal React engineer, Node.js backend engineer, AI engineer, database architect, cybersecurity engineer, accessibility specialist, and premium SaaS product designer.
+
+Your task is to DESIGN, ENGINEER, IMPLEMENT, TEST, and DOCUMENT a complete, advanced, production-oriented full-stack website named **AccessPath**.
+
+Do not create a simple landing page, static mockup, Figma-style prototype, or frontend-only dashboard.
+
+Build a real, modular, full-stack application with working navigation, database persistence, authentication, APIs, role-based access, algorithms, AI integration, reporting workflows, analytics, and administrative tools.
+
+Do not stop after presenting an architecture or implementation plan. Create the actual application and its source files.
+
+---
+
+# 1. PRODUCT IDENTITY
+
+**Product name:** AccessPath
+
+**Full name:** Accessible Campus Navigation & AI-Powered Barrier Reporting System.
+
+**Tagline:** Every Student Deserves an Accessible Path.
+
+**Mission:**
+Make educational campuses more accessible by helping students discover suitable routes, report physical accessibility barriers, verify problems collaboratively, and help institutions improve their environments.
+
+**Target users:**
+- Students
+- Wheelchair users
+- Students with limited mobility
+- Students who need step-free navigation
+- Visually impaired users
+- Campus visitors
+- Teachers and educators
+- Accessibility volunteers
+- Campus maintenance teams
+- Campus administrators
+- Platform administrators
+
+**Main value proposition:**
+
+AccessPath combines accessibility-aware campus navigation, AI-assisted barrier reporting, community verification, institutional maintenance workflows, and accessibility analytics into one connected platform.
+
+The platform must prioritize reliable accessibility information, transparent verification, privacy, usability, and safe navigation.
+
+---
+
+# 2. REQUIRED TECHNOLOGY STACK
+
+Use this architecture unless a concrete technical incompatibility requires an equivalent alternative.
+
+## Frontend
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- TanStack Query
+- Zustand or Context API where appropriate
+- React Hook Form
+- Zod
+- Leaflet
+- OpenStreetMap-compatible map tiles
+- Recharts
+- Lucide React
+- i18next
+
+## Backend
+- Node.js
+- Express.js
+- TypeScript
+- REST API
+- MongoDB
+- Mongoose
+- JWT-based authentication
+- bcrypt password hashing
+- Zod request validation
+- Helmet
+- Rate limiting
+- Structured logging
+
+## Artificial Intelligence
+- Google Gemini API
+- Server-side Gemini integration
+- Structured JSON outputs
+- Prompt validation
+- AI service abstraction
+- AI request logging with privacy safeguards
+- Configurable AI provider
+- Mock AI provider for offline development
+
+Never expose Gemini API keys in browser code.
+
+## Deployment architecture
+- Frontend: Netlify-compatible
+- Backend: Render-compatible or Google Cloud Run-compatible
+- Database: MongoDB Atlas
+- Image storage: configurable object storage adapter
+- Environment-based configuration
+
+Use a monorepo with separate frontend and backend directories.
+
+---
+
+# 3. COMPLETE PROJECT ARCHITECTURE
+
+Create this professional structure:
+
+accesspath/
+│
+├── frontend/
+│   ├── public/
+│   │   ├── icons/
+│   │   ├── illustrations/
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   │
+│   ├── src/
+│   │   ├── app/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   │   ├── ui/
+│   │   │   ├── layout/
+│   │   │   ├── maps/
+│   │   │   ├── navigation/
+│   │   │   ├── forms/
+│   │   │   ├── dashboards/
+│   │   │   └── accessibility/
+│   │   │
+│   │   ├── features/
+│   │   │   ├── authentication/
+│   │   │   ├── profiles/
+│   │   │   ├── campuses/
+│   │   │   ├── maps/
+│   │   │   ├── routing/
+│   │   │   ├── accessibility/
+│   │   │   ├── reporting/
+│   │   │   ├── ai/
+│   │   │   ├── verification/
+│   │   │   ├── administration/
+│   │   │   ├── analytics/
+│   │   │   ├── notifications/
+│   │   │   ├── community/
+│   │   │   └── integrations/
+│   │   │
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── store/
+│   │   ├── types/
+│   │   ├── utils/
+│   │   ├── i18n/
+│   │   ├── routes/
+│   │   └── styles/
+│   │
+│   └── tests/
+│
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   │   ├── ai/
+│   │   │   ├── routing/
+│   │   │   ├── accessibility/
+│   │   │   ├── reporting/
+│   │   │   ├── verification/
+│   │   │   ├── notifications/
+│   │   │   ├── analytics/
+│   │   │   └── integrations/
+│   │   ├── repositories/
+│   │   ├── utils/
+│   │   ├── jobs/
+│   │   ├── types/
+│   │   └── app.ts
+│   │
+│   └── tests/
+│
+├── docs/
+│   ├── architecture.md
+│   ├── api-reference.md
+│   ├── database-schema.md
+│   ├── ai-disclosure.md
+│   ├── privacy-policy.md
+│   ├── accessibility-methodology.md
+│   ├── routing-algorithm.md
+│   ├── deployment.md
+│   └── testing.md
+│
+├── scripts/
+├── .env.example
+├── .gitignore
+├── README.md
+├── package.json
+└── LICENSE
+
+Keep components modular, reusable, typed, and maintainable.
+
+---
+
+# 4. COMPLETE FEATURE REQUIREMENTS
+
+Implement the following 164 named features as part of the AccessPath application.
+
+Every feature must be represented in the product architecture and connected to the appropriate interface, service, workflow, or integration.
+
+Do not create dead buttons or fake functionality.
+
+## MODULE A — STUDENT AND USER FEATURES
+
+1. User Registration
+2. Secure Login & Logout
+3. User Profile Management
+4. Campus Selection
+5. Interactive Campus Map
+6. Building Search
+7. Classroom Search
+8. Library Locator
+9. Laboratory Locator
+10. Accessible Facility Finder
+11. Nearby Facility Discovery
+12. Current Location Detection
+13. Favorite Locations
+14. Recently Visited Places
+15. Saved Routes
+16. Route History
+
+## MODULE B — ACCESSIBILITY PROFILES
+
+17. Wheelchair Navigation Mode
+18. Step-Free Navigation Mode
+19. Limited Mobility Mode
+20. Ramp-Required Preference
+21. Elevator-Required Preference
+22. Stairs Avoidance
+23. Smooth Surface Preference
+24. Wide Path Preference
+25. Low-Gradient Route Preference
+26. Well-Lit Route Preference
+27. Custom Accessibility Preferences
+28. Accessibility Profile Management
+
+User preferences should be configurable and editable.
+
+Do not require users to disclose medical diagnoses. Store only information required for accessibility preferences.
+
+## MODULE C — SMART NAVIGATION
+
+29. Accessible Route Planner
+30. Shortest Path Calculation
+31. Dijkstra-Based Routing
+32. Accessibility-Aware Routing
+33. Step-Free Route Calculation
+34. Ramp-Aware Routing
+35. Elevator-Aware Routing
+36. Stairs-Free Route Filtering
+37. Obstacle-Aware Routing
+38. Alternative Route Suggestions
+39. Route Recalculation
+40. Route Preview
+41. Route Distance Estimation
+42. Estimated Travel Time
+43. Route Accessibility Details
+44. Turn-by-Turn Navigation
+45. Route Condition Warnings
+46. Blocked Path Detection
+47. Temporary Path Closure
+48. Route Feedback
+
+### Navigation engineering rules
+
+Represent the campus as a weighted graph.
+
+Nodes represent:
+- Entrances
+- Buildings
+- Classrooms
+- Corridors
+- Intersections
+- Elevators
+- Ramps
+- Facilities
+
+Edges represent connections between locations.
+
+Each edge should have attributes such as:
+
+- Distance
+- Width
+- Surface condition
+- Stairs
+- Ramp availability
+- Slope or gradient
+- Elevator availability
+- Lighting
+- Obstruction status
+- Accessibility verification
+- Last verification timestamp
+
+Implement a real graph-based routing engine.
+
+Use Dijkstra's algorithm initially. Design it so A* can be added later.
+
+Apply accessibility constraints as hard filtering rules before route optimization.
+
+Examples:
+
+A wheelchair user must not receive a route containing stairs.
+
+A step-free route must not depend on an unverified or unavailable ramp.
+
+A blocked path must not be recommended.
+
+Unknown accessibility information must not automatically be treated as accessible.
+
+When no suitable verified route exists, communicate that clearly rather than inventing one.
+
+Calculate distance and estimated travel time from route data. Label estimated values as estimates.
+
+Explain why each suggested route was selected.
+
+Allow alternative route comparison.
+
+## MODULE D — AI-POWERED FEATURES
+
+49. AI Barrier Report Classification
+50. Bengali Natural Language Processing
+51. English Natural Language Processing
+52. AI Report Summarization
+53. AI Location Extraction
+54. AI Issue Category Detection
+55. AI Priority Recommendation
+56. Duplicate Report Detection
+57. AI-Assisted Report Validation
+58. AI Campus Assistant
+59. AI Report Translation
+60. AI Accessibility Insights
+61. AI Image-Assisted Issue Recognition
+62. AI Suggested Resolution
+
+### Gemini AI requirements
+
+Create a dedicated backend AI service.
+
+Use Gemini for:
+
+- Bengali and English report interpretation
+- Report category classification
+- Structured report extraction
+- Report summarization
+- Translation
+- Duplicate report similarity assistance
+- Suggested maintenance actions
+- Image-assisted accessibility issue analysis
+- Campus information assistance
+- Analytics summaries
+
+Define strict structured JSON schemas for AI responses.
+
+Example response:
+
+{
+  "category": "temporary_obstruction",
+  "location": "Library Entrance",
+  "description": "Construction material blocks the ramp approach",
+  "accessibilityImpact": "ramp_approach_blocked",
+  "suggestedPriority": "high",
+  "confidence": 0.89,
+  "requiresHumanVerification": true
+}
+
+The values above are illustrative, not actual model results.
+
+AI must never automatically mark a path safe, certify accessibility, approve reports, or override verified campus information.
+
+An AI classification is a recommendation, not ground truth.
+
+Implement API timeouts, rate limits, error handling, retry policies, and a mock provider.
+
+Do not expose confidential user data in AI prompts unnecessarily.
+
+## MODULE E — BARRIER REPORTING
+
+63. Report Accessibility Problem
+64. Photo Evidence Upload
+65. Text-Based Issue Reporting
+66. Voice-Based Issue Reporting
+67. Report Location Selection
+68. Report Category Selection
+69. Report Description
+70. Report Submission
+71. Report Tracking
+72. Report Status Updates
+73. Report Comments
+74. Report Upvoting
+75. Duplicate Report Merging
+76. Report History
+77. Report Resolution Feedback
+
+Report categories should include:
+
+- Broken ramp
+- Missing ramp
+- Blocked walkway
+- Damaged pavement
+- Broken elevator
+- Missing accessible entrance
+- Stairs-only access
+- Insufficient lighting
+- Narrow passage
+- Construction obstruction
+- Other accessibility barrier
+
+Include image preview and validation.
+
+Validate file size, MIME type, image format, and upload permissions.
+
+Create a clear status timeline for every report.
+
+## MODULE F — COMMUNITY VERIFICATION
+
+78. Community Barrier Verification
+79. Volunteer Verification
+80. Admin Verification
+81. Verification Evidence
+82. Verified Accessibility Information
+83. Unverified Report Labels
+84. Community Feedback
+85. Report Dispute
+86. False Report Moderation
+87. Barrier Resolution Confirmation
+
+### Verification workflow
+
+Use report statuses:
+
+- Submitted
+- AI Classified
+- Pending Review
+- Under Verification
+- Verified
+- Assigned
+- In Progress
+- Resolved
+- Rejected
+- Disputed
+- Duplicate
+
+Only authorized verification actions can change the authoritative accessibility dataset.
+
+Keep a complete audit trail.
+
+Allow evidence and timestamps to be attached to verification records.
+
+Avoid exposing reporter identities publicly.
+
+## MODULE G — ADMIN DASHBOARD
+
+88. Admin Dashboard
+89. Campus Management
+90. Building Management
+91. Location Management
+92. Path Management
+93. Accessibility Attribute Management
+94. Campus Map Editor
+95. Barrier Report Management
+96. Report Approval
+97. Report Rejection
+98. Report Assignment
+99. Maintenance Tracking
+100. Temporary Path Restriction Management
+101. User Management
+102. Volunteer Management
+103. Role-Based Access Control
+104. Activity Audit Logs
+105. Notification Management
+
+Create a fully functional administrative interface.
+
+Administrators should be able to manage campuses, buildings, location nodes, path edges, accessibility attributes, reports, verification records, assignments, users, and maintenance activities.
+
+All critical administrative operations must be authenticated, authorized, validated, and logged.
+
+## MODULE H — ANALYTICS AND IMPACT
+
+106. Total Accessibility Reports
+107. Pending Reports Analytics
+108. Verified Barriers Analytics
+109. Resolved Issues Analytics
+110. Accessibility Issue Heatmap
+111. Building Accessibility Score
+112. Campus Accessibility Overview
+113. Report Resolution Time
+114. Monthly Impact Report
+115. Accessibility Improvement Tracking
+116. Community Participation Analytics
+117. Exportable Reports
+
+Create interactive charts, date filters, building filters, and report categories.
+
+Calculate all analytics using actual database records.
+
+Clearly distinguish demo seed data from real operational data.
+
+Never display invented metrics as real institutional impact.
+
+Create exportable CSV reports and a print-friendly report layout.
+
+## MODULE I — ACCESSIBILITY AND USER EXPERIENCE
+
+118. English Language Support
+119. Bengali Language Support
+120. High Contrast Mode
+121. Adjustable Font Size
+122. Screen Reader Compatibility
+123. Keyboard Navigation
+124. Accessible Form Labels
+125. Clear Visual Navigation
+126. Voice Guidance
+127. Reduced Motion Mode
+128. Mobile Responsive Interface
+129. Low Bandwidth Mode
+130. Progressive Web App
+131. Offline Map Cache
+
+Follow WCAG 2.2 AA principles.
+
+Use semantic HTML, logical focus order, accessible names, visible focus indicators, sufficient contrast, and keyboard-accessible interactions.
+
+Provide Bangla and English translations for interface labels, navigation, forms, alerts, and accessibility instructions.
+
+Support reduced motion.
+
+Offline functionality should distinguish cached data from live data.
+
+Do not suggest that stale offline map information is current.
+
+## MODULE J — NOTIFICATIONS
+
+132. In-App Notifications
+133. Report Status Notifications
+134. Verification Notifications
+135. Route Change Alerts
+136. Temporary Closure Alerts
+137. Maintenance Update Notifications
+138. Admin Announcements
+139. Email Notifications
+
+Implement persistent in-app notifications.
+
+Create email notification adapters.
+
+Email sending must require valid provider configuration and must not pretend that emails were sent when no provider is configured.
+
+## MODULE K — SECURITY AND PRIVACY
+
+140. Secure Authentication
+141. Password Hashing
+142. Input Validation
+143. API Rate Limiting
+144. Role-Based Authorization
+145. Secure Image Upload
+146. Privacy Controls
+147. Personal Data Minimization
+148. Consent Management
+149. Abuse Prevention
+150. Secure API Communication
+
+Use:
+
+- Secure password hashing
+- HttpOnly authentication cookies where supported
+- Appropriate SameSite and Secure cookie settings
+- CSRF protection for cookie-authenticated state-changing requests
+- Authentication and authorization middleware
+- Rate limiting
+- Request validation
+- Output sanitization
+- Secure upload validation
+- Helmet
+- HTTPS in production
+- Secret management through environment variables
+- Audit logs
+- Safe error messages
+
+Do not store plaintext passwords, API secrets, or unnecessary sensitive information.
+
+## MODULE L — ADVANCED FUTURE AND INTEGRATION FEATURES
+
+151. Indoor Navigation
+152. QR-Based Building Navigation
+153. Bluetooth Beacon Positioning
+154. Live Elevator Status
+155. Real-Time Construction Updates
+156. Live Obstacle Monitoring
+157. Voice-First Navigation Assistant
+158. AR-Based Navigation
+159. Multi-Campus Support
+160. Institutional API Integration
+161. Emergency Evacuation Route Planning
+162. Live Accessibility Data Synchronization
+163. Public Accessibility Data Portal
+164. Predictive Maintenance Insights
+
+Implement the application architecture, configuration interfaces, integration adapters, and usable demo workflows for these modules.
+
+For hardware-dependent functionality, implement a provider abstraction.
+
+For example:
+
+- QR scanning can use the browser camera when permission is granted.
+- Bluetooth beacon positioning must detect device and permission support.
+- Elevator status must connect through a configured institution adapter.
+- Real-time obstacle monitoring must have a configured sensor or trusted data source.
+- AR navigation must test device/browser capability and provide a conventional navigation fallback.
+- Emergency evacuation routes must use administrator-verified emergency data and must never be presented as officially approved without institutional authorization.
+
+Create a clearly labelled simulation environment where genuine integrations are unavailable.
+
+Do not fabricate live hardware data.
+
+Predictive maintenance must explain that outputs are estimates, and it must use sufficient historical data before offering meaningful predictions.
+
+---
+
+# 5. ROLE-BASED APPLICATION
+
+Implement these roles:
+
+1. Student
+2. Volunteer
+3. Campus Moderator
+4. Campus Administrator
+5. Platform Super Administrator
+
+Each role must have separate permissions.
+
+### Student
+- View map
+- Search places
+- Manage accessibility preferences
+- Calculate routes
+- Submit reports
+- View personal report history
+- Follow notifications
+- Submit feedback
+
+### Volunteer
+- Student permissions
+- View assigned verification tasks
+- Upload verification evidence
+- Submit verification recommendations
+
+### Campus Moderator
+- Review reports
+- Check submitted evidence
+- Flag duplicates
+- Manage disputes
+- Recommend verification decisions
+
+### Campus Administrator
+- Manage campus information
+- Verify reports
+- Change accessibility attributes
+- Manage routes
+- Manage maintenance workflows
+- View analytics
+- Manage campus users
+
+### Platform Super Administrator
+- Manage all campuses
+- Manage institutions
+- Manage global users
+- Configure platform integrations
+- Manage global settings
+- Review audit records
+
+Implement server-side permission checks. Hiding UI elements is not sufficient authorization.
+
+---
+
+# 6. COMPLETE WEBSITE PAGES
+
+Create all of the following pages.
+
+## Public pages
+- Home
+- About AccessPath
+- How It Works
+- Features
+- Accessibility
+- Explore Demo Campus
+- Help Center
+- Contact
+- Privacy Policy
+- Terms of Service
+
+## Authentication
+- Sign Up
+- Sign In
+- Forgot Password
+- Reset Password
+- Email Verification
+- Access Denied
+
+## Student application
+- Student Dashboard
+- Campus Explorer
+- Interactive Campus Map
+- Place Details
+- Smart Route Planner
+- Route Details
+- Accessibility Profile
+- Saved Locations
+- Route History
+- Submit Barrier Report
+- My Reports
+- Report Details
+- Community Reports
+- Notifications
+- Personal Settings
+
+## Volunteer application
+- Volunteer Dashboard
+- Verification Queue
+- Verification Details
+- Evidence Submission
+- Assigned Tasks
+- Volunteer Activity
+
+## Campus administration
+- Admin Dashboard
+- Campus Management
+- Building Management
+- Location Manager
+- Campus Graph Editor
+- Accessibility Editor
+- Reports Management
+- Verification Management
+- Maintenance Management
+- Temporary Closures
+- User Management
+- Volunteer Management
+- Analytics
+- Impact Reports
+- Announcement Manager
+- Integration Settings
+- Audit Logs
+- Campus Settings
+
+## Super administration
+- Global Overview
+- Institution Management
+- Global User Management
+- Platform Analytics
+- AI Configuration
+- System Configuration
+- Integration Monitoring
+- Global Audit Logs
+
+## System pages
+- Not Found
+- Server Error
+- Offline
+- Loading
+- No Search Results
+- No Accessible Route Available
+
+Every page must have real navigation and suitable loading, empty, error, and success states.
+
+---
+
+# 7. INTERFACE AND VISUAL DESIGN SYSTEM
+
+Design a premium, trustworthy, modern accessibility technology platform.
+
+Avoid generic AI-generated dashboard aesthetics.
+
+### Visual direction
+
+Use a clean combination of:
+
+- Deep navy
+- Accessible teal
+- Soft off-white
+- Neutral gray
+- Carefully selected status colors
+
+Suggested design tokens:
+
+Primary: #123B56
+Secondary: #147D78
+Accent: #2DB89A
+Background: #F7F9FC
+Surface: #FFFFFF
+Text: #172A3A
+Muted: #637487
+
+Use these as initial design tokens and verify contrast before applying them to text and controls.
+
+### Design characteristics
+
+- Professional SaaS-style layout
+- Spacious typography
+- Consistent spacing
+- Carefully designed sidebar
+- Responsive navigation
+- Clear dashboard cards
+- Real interactive maps
+- Professional tables
+- Useful filters
+- Interactive data visualizations
+- Accessible modals
+- Consistent empty states
+- Good mobile navigation
+
+### Required design system components
+
+- Buttons
+- Inputs
+- Selects
+- Checkboxes
+- Radio groups
+- Tabs
+- Cards
+- Dialogs
+- Drawers
+- Tooltips
+- Toast messages
+- Tables
+- Pagination
+- Search components
+- Filter components
+- Map markers
+- Status indicators
+- Charts
+- Breadcrumbs
+- Loading skeletons
+- Error states
+
+All controls must actually work.
+
+Do not use decorative controls that appear functional but do nothing.
+
+---
+
+# 8. HOME PAGE DESIGN
+
+Create a compelling professional homepage.
+
+### Hero section
+
+Headline:
+
+Every Student Deserves an Accessible Path.
+
+Supporting text:
+
+Navigate campuses with confidence. Discover accessible routes, report physical barriers, and help create inclusive educational environments.
+
+Primary CTA:
+Explore Accessible Maps
+
+Secondary CTA:
+Report an Accessibility Barrier
+
+Show a realistic campus map visualization with different route types.
+
+### Additional homepage sections
+
+1. Problem Statement
+2. How AccessPath Works
+3. Smart Accessible Navigation
+4. AI-Assisted Barrier Reporting
+5. Community Verification
+6. Campus Accessibility Dashboard
+7. Accessibility Features
+8. Institutional Benefits
+9. Impact Measurement
+10. Frequently Asked Questions
+11. Final Call to Action
+12. Professional Footer
+
+The homepage should explain the actual functionality, not make unsupported claims.
+
+---
+
+# 9. REAL INTERACTIVE CAMPUS MAP
+
+Use Leaflet with suitable map tile services and proper attribution.
+
+Provide a sample campus dataset clearly labelled:
+
+DEMO CAMPUS — SYNTHETIC DATA
+
+Include:
+
+- 12–15 sample campus locations
+- 20–30 connecting path edges
+- Example ramps
+- Example stairs
+- Example elevators
+- Example accessible entrances
+- Example blocked paths
+- Example buildings
+- Example facilities
+
+Enable:
+
+- Location selection
+- Destination selection
+- Filter panels
+- Route visualization
+- Alternative route display
+- Accessible place markers
+- Barrier markers
+- Place information popups
+- Map legend
+- Accessibility condition details
+
+The campus data should be editable from the admin dashboard.
+
+Never imply that the synthetic campus represents a real school.
+
+---
+
+# 10. DATABASE DESIGN
+
+Create suitable Mongoose models and indexes.
+
+Minimum collections:
+
+- User
+- Campus
+- Building
+- Location
+- PathEdge
+- AccessibilityProfile
+- AccessibilityReport
+- ReportEvidence
+- Verification
+- MaintenanceTask
+- RouteHistory
+- FavoriteLocation
+- Notification
+- Announcement
+- CampusIntegration
+- AuditLog
+- AIInteraction
+- Institution
+- EmergencyRoute
+
+Use:
+
+- Stable identifiers
+- Created timestamps
+- Updated timestamps
+- Appropriate references
+- Validation
+- Indexes
+- Pagination
+- Soft deletion where appropriate
+
+Add database indexes for common location, status, report, campus, and user queries.
+
+Prevent unauthorized cross-campus access.
+
+---
+
+# 11. API ARCHITECTURE
+
+Use a versioned API prefix:
+
+/api/v1/
+
+Create well-organized endpoints.
+
+Examples:
+
+Authentication:
+- POST /auth/register
+- POST /auth/login
+- POST /auth/logout
+- GET /auth/me
+
+Campuses:
+- GET /campuses
+- GET /campuses/:id
+- POST /campuses
+- PATCH /campuses/:id
+
+Maps:
+- GET /campuses/:id/map
+- GET /campuses/:id/locations
+- GET /campuses/:id/edges
+
+Routing:
+- POST /routes/calculate
+- GET /routes/:id
+- POST /routes/:id/feedback
+
+Reports:
+- POST /reports
+- GET /reports
+- GET /reports/:id
+- PATCH /reports/:id
+- POST /reports/:id/evidence
+
+AI:
+- POST /ai/classify-report
+- POST /ai/summarize
+- POST /ai/translate
+- POST /ai/assistant
+- POST /ai/analyze-image
+
+Verification:
+- GET /verifications/queue
+- POST /verifications
+- PATCH /verifications/:id
+
+Analytics:
+- GET /analytics/overview
+- GET /analytics/barriers
+- GET /analytics/resolution
+- GET /analytics/accessibility
+
+Admin:
+- GET /admin/dashboard
+- GET /admin/users
+- GET /admin/audit-logs
+
+Use appropriate endpoints for all other features.
+
+Every endpoint must have:
+- Input validation
+- Authentication where required
+- Role permission checks
+- Error handling
+- Consistent response shape
+- Appropriate HTTP status codes
+
+Do not return unrestricted database records.
+
+---
+
+# 12. AI CAMPUS ASSISTANT
+
+Create an assistant named:
+
+AccessPath AI Assistant
+
+It should help users:
+
+- Find campus facilities
+- Understand accessibility information
+- Prepare barrier reports
+- Explain route options
+- Translate reports
+- Understand report statuses
+- Find information in authorized campus records
+
+Example:
+
+User:
+"আমি লাইব্রেরিতে যেতে চাই, কিন্তু সিঁড়ি ব্যবহার করতে পারি না।"
+
+Assistant:
+"আপনার Step-Free navigation preference অনুযায়ী লাইব্রেরির জন্য উপলব্ধ verified route খুঁজছি।"
+
+The assistant should use actual campus data through secure backend tools.
+
+It must not invent building information or accessibility conditions.
+
+When information is missing, say so.
+
+Never claim emergency services have been contacted.
+
+---
+
+# 13. SECURITY AND PRIVACY
+
+Treat security as an architectural requirement.
+
+Implement:
+
+- Secure authentication
+- Password hashing
+- RBAC
+- Request validation
+- Rate limiting
+- Secure cookies
+- CSRF safeguards as appropriate
+- Secure image uploads
+- File type validation
+- Error handling
+- Audit logs
+- CORS restrictions
+- Security headers
+- Environment-based secrets
+
+Do not:
+- Commit secrets
+- Expose Gemini credentials
+- Store plaintext passwords
+- Trust unverified AI responses
+- Reveal reporter identities in public reports
+- Use private location data without permission
+- Allow users to modify records outside their permissions
+
+Provide a privacy-conscious location permission workflow.
+
+---
+
+# 14. DEMO AND SEED DATA
+
+Create a development-only seed script.
+
+Create synthetic data for:
+
+- One demo institution
+- One demo campus
+- Sample buildings
+- Sample rooms
+- Sample facilities
+- Sample accessible pathways
+- Sample barriers
+- Sample reports
+- Sample verification records
+- Sample maintenance assignments
+- Sample analytics
+
+Create demo accounts for each user role.
+
+Never hardcode production administrator credentials.
+
+Store development credentials in local environment variables or document safe local setup instructions.
+
+Clearly label all seeded data.
+
+---
+
+# 15. INTEGRATION FRAMEWORK
+
+Create modular provider adapters for:
+
+1. Gemini AI
+2. Image Storage
+3. Email Delivery
+4. Browser Geolocation
+5. Map Tiles
+6. QR Scanner
+7. Bluetooth Beacon
+8. Elevator Status
+9. Institutional APIs
+10. Push Notifications
+11. AR Navigation
+12. Sensor Integrations
+
+For each integration expose:
+
+- Provider name
+- Connection status
+- Configuration status
+- Last synchronization
+- Last error
+- Test connection action where applicable
+- Demo or live status
+
+Do not claim an integration works merely because its configuration page exists.
+
+Use mock providers only in clearly marked demo/development mode.
+
+---
+
+# 16. PWA AND OFFLINE SUPPORT
+
+Implement a Progressive Web App with:
+
+- Web app manifest
+- App icons
+- Service worker
+- Installability
+- Offline fallback page
+- Cached application shell
+- Saved route data
+- Cached campus graph
+- Offline report draft storage
+
+When connection returns, provide a safe synchronization workflow.
+
+Never overwrite more recent verified server data with stale offline information.
+
+Do not bulk-cache external map tiles unless the service explicitly permits it.
+
+---
+
+# 17. TESTING REQUIREMENTS
+
+Write actual automated tests.
+
+Frontend:
+- Component tests
+- Form validation tests
+- Navigation tests
+- Accessibility interaction tests
+
+Backend:
+- Authentication tests
+- Authorization tests
+- Report workflow tests
+- API validation tests
+- AI provider tests
+- Upload validation tests
+
+Routing:
+- Shortest path test
+- Wheelchair stairs-exclusion test
+- Step-free route test
+- Blocked edge exclusion test
+- Alternative route test
+- Unknown-accessibility handling test
+- No valid route test
+- Route recalculation test
+
+Security:
+- Unauthorized access
+- Invalid tokens
+- Cross-campus access restrictions
+- Malformed request handling
+- Rate limiting
+- Upload rejection
+
+Use Vitest and Supertest where appropriate.
+
+Do not claim tests pass unless they were actually executed.
+
+---
+
+# 18. DOCUMENTATION AND AI DISCLOSURE
+
+Create a professional README containing:
+
+- Project overview
+- Problem statement
+- Solution
+- Features
+- Technology stack
+- Architecture
+- Installation
+- Environment variables
+- Local development instructions
+- Test commands
+- Deployment instructions
+- Screenshots section
+- AI and third-party resource disclosure
+- Limitations
+- Future roadmap
+
+Create an .env.example without real credentials.
+
+Document the campus graph methodology and routing constraints.
+
+Document AI limitations and human verification responsibilities.
+
+---
+
+# 19. IMPLEMENTATION PRIORITY
+
+Build the complete application architecture, but develop in these implementation stages.
+
+Stage 1 — Foundation:
+- Project configuration
+- Database
+- Authentication
+- Responsive layout
+- Roles and permissions
+- Design system
+
+Stage 2 — Navigation:
+- Campus data
+- Interactive map
+- Graph engine
+- Accessible routing
+- Route details
+- Route feedback
+
+Stage 3 — Reporting:
+- Report forms
+- Evidence upload
+- Gemini classification
+- Report history
+- Status tracking
+
+Stage 4 — Verification:
+- Verification queue
+- Moderator tools
+- Admin approval
+- Barrier status updates
+- Route recalculation
+
+Stage 5 — Administration:
+- Campus editor
+- Map editor
+- User management
+- Maintenance workflow
+- Analytics
+
+Stage 6 — Advanced modules:
+- PWA
+- Offline drafts
+- QR navigation
+- Integration adapters
+- AR capability detection
+- Emergency routing
+- Predictive analytics
+- Public data portal
+
+Stage 7 — Quality:
+- Automated testing
+- Security review
+- Accessibility review
+- Performance improvements
+- Deployment documentation
+
+Do not leave all functionality for a future roadmap.
+
+Implement usable versions of the features that can be completed without external hardware or unavailable services.
+
+---
+
+# 20. STRICT DEVELOPMENT RULES
+
+These requirements are mandatory.
+
+1. Build an actual full-stack application.
+2. Use TypeScript throughout.
+3. Use reusable architecture.
+4. Do not put the entire application in one component.
+5. Do not generate unnecessarily duplicated code.
+6. Do not use placeholder buttons for critical features.
+7. Do not create fake backend requests.
+8. Do not hardcode fake API success responses.
+9. Do not expose API keys.
+10. Do not use unverified data as verified accessibility information.
+11. Do not claim simulated integrations are live.
+12. Do not fabricate analytics.
+13. Do not claim testing has passed without execution.
+14. Do not claim the platform is certified for accessibility compliance.
+15. Do not compromise accessibility for visual design.
+16. Do not omit loading, error, empty, and success states.
+17. Do not break working functionality while implementing additional features.
+18. Maintain consistent types and database schemas.
+19. Keep API and frontend contracts synchronized.
+20. Use realistic sample data, explicitly labelled as synthetic.
+
+Create a FEATURE_REGISTRY.md tracking all 164 features with:
+- Feature number
+- Feature name
+- Module
+- Frontend status
+- Backend status
+- Integration dependency
+- Testing status
+- Limitations
+
+Use these implementation statuses:
+- Implemented and tested
+- Implemented, awaiting integration credentials
+- Demo/simulated
+- Pending external hardware
+- Not implemented
+
+Never mark a feature implemented and tested without evidence.
+
+---
+
+# 21. FINAL DELIVERABLES
+
+Produce:
+
+1. Complete React frontend
+2. Complete Node.js backend
+3. MongoDB models
+4. Authentication
+5. Role-based dashboards
+6. Interactive campus map
+7. Working accessibility route engine
+8. Gemini AI integration
+9. Barrier reporting
+10. Human verification
+11. Campus administration
+12. Analytics dashboard
+13. Bengali and English support
+14. Accessibility controls
+15. PWA functionality
+16. Integration adapters
+17. Sample campus seed data
+18. Automated tests
+19. README
+20. API documentation
+21. Database documentation
+22. Security and privacy documentation
+23. Deployment configuration
+24. Feature registry
+25. Professional final project structure
+
+---
+
+# 22. FINAL EXECUTION INSTRUCTION
+
+Begin by inspecting the available Google AI Studio build environment and its project capabilities.
+
+Create the application files directly.
+
+If a requirement is too large for one generation, continue implementing it module by module without discarding existing working code.
+
+First establish a working full-stack foundation, then progressively complete the application.
+
+After each implementation stage:
+
+- Inspect generated files.
+- Fix TypeScript errors.
+- Fix dependency issues.
+- Verify API connectivity.
+- Verify database operations.
+- Run applicable tests.
+- Check responsive layouts.
+- Check keyboard accessibility.
+- Verify role permissions.
+- Update FEATURE_REGISTRY.md.
+
+Do not stop after producing a plan.
+
+Do not substitute screenshots for working features.
+
+Do not silently omit advanced modules.
+
+Use sensible engineering decisions without repeatedly asking me questions.
+
+Your final objective is to deliver an impressive, well-engineered, accessible, functional, secure, and maintainable AccessPath web application suitable for a serious student hackathon submission.
+
+**BUILD ACCESSPATH NOW.**

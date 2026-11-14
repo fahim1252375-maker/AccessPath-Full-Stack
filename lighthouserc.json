@@ -1,0 +1,22 @@
+{
+  "ci": {
+    "collect": {
+      "url": ["http://127.0.0.1:4173/", "http://127.0.0.1:4173/features"],
+      "numberOfRuns": 2,
+      "startServerCommand": "NODE_ENV=development PORT=4173 JWT_SECRET=accesspath-lhci-only-secret-change-000000000000 AI_PROVIDER=mock ALLOW_DEMO_SEED=true npm run dev",
+      "startServerReadyPattern": "AccessPath server listening",
+      "startServerTimeout": 180000,
+      "settings": { "chromeFlags": "--no-sandbox --disable-dev-shm-usage" }
+    },
+    "assert": {
+      "preset": "lighthouse:recommended",
+      "assertions": {
+        "categories:performance": ["warn", { "minScore": 0.65 }],
+        "categories:accessibility": ["error", { "minScore": 0.9 }],
+        "resourceSizes:script": ["error", { "maxNumericValue": 2600000 }],
+        "resourceSizes:total": ["warn", { "maxNumericValue": 6000000 }]
+      }
+    },
+    "upload": { "target": "filesystem", "outputDir": ".lighthouseci" }
+  }
+}

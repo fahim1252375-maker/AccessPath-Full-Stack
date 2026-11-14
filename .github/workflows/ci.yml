@@ -1,0 +1,47 @@
+name: AccessPath CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      NODE_ENV: test
+      JWT_SECRET: ci-only-secret-not-for-production-000000000000
+      AI_PROVIDER: mock
+      ALLOW_DEMO_SEED: 'true'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package.json
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Offline native smoke tests
+        run: npm run test:simulation
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+      - name: Type check
+        run: npm run lint
+      - name: Unit and API tests
+        run: npm test
+      - name: Production build
+        run: npm run build
+      - name: Enforce JS and 3D bundle budgets
+        run: npm run budget
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Browser E2E and axe accessibility tests
+        run: npm run test:e2e
+      - name: Lighthouse CI
+        run: npm run lighthouse:ci

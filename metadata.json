@@ -1,0 +1,6 @@
+{
+  "name": "AccessPath",
+  "description": "Accessible Campus Navigation & AI-Powered Barrier Reporting System. Every Student Deserves an Accessible Path.",
+  "requestFramePermissions": ["geolocation", "camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

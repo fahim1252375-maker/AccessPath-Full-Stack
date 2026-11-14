@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --ap-primary: #0D2235;
+  --ap-secondary: #0E9B87;
+  --ap-accent: #18C6AD;
+  --ap-accent-2: #32A7D9;
+  --ap-bg: #F4F8FB;
+  --ap-bg-alt: #E9F1F7;
+  --ap-surface: #FFFFFF;
+  --ap-surface-2: #F0F6FA;
+  --ap-text: #0A1D2E;
+  --ap-muted: #455D71;
+  --ap-border: #D0DDE9;
+  --ap-danger: #B91C1C;
+  --ap-danger-bg: #FEF2F2;
+  --ap-danger-border: #FECACA;
+  --ap-warn: #92400E;
+  --ap-warn-bg: #FFFBEB;
+  --ap-warn-border: #FDE68A;
+  --ap-ok: #0B6B5F;
+  --ap-ok-bg: #ECFDF5;
+  --ap-ok-border: #A7F3D0;
+  --font-display: 'Plus Jakarta Sans', 'Noto Sans Bengali', system-ui, sans-serif;
+  --font-body: 'Manrope', 'Noto Sans Bengali', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+html.dark {
+  --ap-primary: #18C6AD;
+  --ap-secondary: #32A7D9;
+  --ap-accent: #18C6AD;
+  --ap-accent-2: #32A7D9;
+  --ap-bg: #071827;
+  --ap-bg-alt: #0D2235;
+  --ap-surface: #132B3D;
+  --ap-surface-2: #0F2537;
+  --ap-text: #F5FAFC;
+  --ap-muted: #9AB0BE;
+  --ap-border: #1E3E56;
+  --ap-danger: #FCA5A5;
+  --ap-danger-bg: #2D1218;
+  --ap-danger-border: #7F1D1D;
+  --ap-warn: #FCD34D;
+  --ap-warn-bg: #2A200B;
+  --ap-warn-border: #78350F;
+  --ap-ok: #5EEAD4;
+  --ap-ok-bg: #092B29;
+  --ap-ok-border: #115E59;
+}
+
+html {
+  font-family: var(--font-body);
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--ap-bg);
+  color: var(--ap-text);
+}
+
+html[data-font-size="sm"] { font-size: 14px; }
+html[data-font-size="base"] { font-size: 16px; }
+html[data-font-size="lg"] { font-size: 18px; }
+html[data-font-size="xl"] { font-size: 20px; }
+
+body {
+  background-color: var(--ap-bg);
+  color: var(--ap-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono, .tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Theme Surface & Architectural Grid Helpers */
+.ap-surface {
+  background-color: var(--ap-surface);
+  border-color: var(--ap-border);
+  color: var(--ap-text);
+}
+
+.ap-surface-alt {
+  background-color: var(--ap-surface-2);
+  border-color: var(--ap-border);
+  color: var(--ap-text);
+}
+
+.ap-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(24, 198, 173, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(50, 167, 217, 0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* High Contrast Accessibility Mode (WCAG AAA+ for both Light & Dark) */
+html.high-contrast:not(.dark) {
+  --ap-primary: #000000;
+  --ap-secondary: #004D40;
+  --ap-accent: #005A4E;
+  --ap-accent-2: #003F7F;
+  --ap-bg: #FFFFFF;
+  --ap-bg-alt: #F3F4F6;
+  --ap-surface: #FFFFFF;
+  --ap-surface-2: #F8FAFC;
+  --ap-text: #000000;
+  --ap-muted: #111827;
+  --ap-border: #000000;
+}
+
+html.dark.high-contrast {
+  --ap-primary: #5EEAD4;
+  --ap-secondary: #38BDF8;
+  --ap-accent: #2DD4BF;
+  --ap-accent-2: #38BDF8;
+  --ap-bg: #020810;
+  --ap-bg-alt: #06121E;
+  --ap-surface: #0A1B2B;
+  --ap-surface-2: #0F2438;
+  --ap-text: #FFFFFF;
+  --ap-muted: #E2E8F0;
+  --ap-border: #FFFFFF;
+}
+
+html.high-contrast .ap-surface {
+  border-width: 2px;
+}
+
+/* Reduced Motion Mode */
+html.reduced-motion *,
+html.reduced-motion *::before,
+html.reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Accessible Focus Indicators */
+*:focus-visible {
+  outline: 3px solid #18C6AD;
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: #0D2235;
+  color: #F5FAFC;
+  border: 2px solid #18C6AD;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  border-radius: 0.5rem;
+}
+
+/* Leaflet map container hygiene + clean dark-theme tile filter when dark theme active */
+.leaflet-container {
+  font-family: var(--font-body);
+  z-index: 1;
+}
+
+html.dark .leaflet-tile-pane {
+  filter: brightness(0.86) contrast(1.04) saturate(0.88);
+}
+
+html.dark .leaflet-popup-content-wrapper,
+html.dark .leaflet-popup-tip {
+  background-color: #132B3D;
+  color: #F5FAFC;
+  border: 1px solid #1E3E56;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+}

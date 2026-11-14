@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+uploads
+data
+bun.lock
+package-lock.json
+frontend/src/data/featureCatalog.ts
+FEATURE_REGISTRY.md

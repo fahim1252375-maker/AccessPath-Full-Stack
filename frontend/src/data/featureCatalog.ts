@@ -2265,7 +2265,10 @@ export const MODULE_METADATA = Object.fromEntries(
   ])
 ) as Record<string, { name: string; count: number }>;
 
-export const MODULE_RANGE = Object.keys(MODULE_METADATA).join("–");
+const MODULE_CODES = Object.keys(MODULE_METADATA);
+export const MODULE_RANGE = MODULE_CODES.length
+  ? `${MODULE_CODES[0]}–${MODULE_CODES[MODULE_CODES.length - 1]}`
+  : "";
 
 export function getFeatureById(featureId: string) {
   const normalized = featureId.trim().toUpperCase();
